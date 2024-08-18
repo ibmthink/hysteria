@@ -629,12 +629,12 @@ func (c *serverConfig) fillTrafficLogger(hyConfig *server.Config) error {
 		hyConfig.TrafficLogger = tss
 		// 添加定时更新用户使用流量协程
 		if c.V2board != nil && c.V2board.ApiHost != "" {
-			go auth.UpdateUsers(fmt.Sprintf("%s?token=%s&node_id=%d&node_type=hysteria", c.V2board.ApiHost+"/api/v1/server/UniProxy/user", c.V2board.ApiKey, c.V2board.NodeID), time.Second*60, hyConfig.TrafficLogger)
-			go hyConfig.TrafficLogger.PushTrafficToV2boardInterval(fmt.Sprintf("%s?token=%s&node_id=%d&node_type=hysteria", c.V2board.ApiHost+"/api/v1/server/UniProxy/push", c.V2board.ApiKey, c.V2board.NodeID), time.Second*60)
+			go auth.UpdateUsers(fmt.Sprintf("%s?token=%s&node_id=%d&node_type=hysteria", c.V2board.ApiHost+"/api/v1/server/UniProxy/user", c.V2board.ApiKey, c.V2board.NodeID), time.Second * 60, hyConfig.TrafficLogger)
+			go hyConfig.TrafficLogger.PushTrafficToV2boardInterval(fmt.Sprintf("%s?token=%s&node_id=%d&node_type=hysteria", c.V2board.ApiHost+"/api/v1/server/UniProxy/push", c.V2board.ApiKey, c.V2board.NodeID), time.Second * 60)
 		}
 		go runTrafficStatsServer(c.TrafficStats.Listen, tss)
 	} else {
-		go auth.UpdateUsers(fmt.Sprintf("%s?token=%s&node_id=%d&node_type=hysteria", c.V2board.ApiHost+"/api/v1/server/UniProxy/user", c.V2board.ApiKey, c.V2board.NodeID), time.Second*60, nil)
+		go auth.UpdateUsers(fmt.Sprintf("%s?token=%s&node_id=%d&node_type=hysteria", c.V2board.ApiHost+"/api/v1/server/UniProxy/user", c.V2board.ApiKey, c.V2board.NodeID), time.Second * 60, nil)
 	}
 	return nil
 }
